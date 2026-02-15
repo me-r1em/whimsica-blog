@@ -2,8 +2,10 @@
 
 A magical blog platform where users can register, login, write stories, manage profiles, and share enchanted moments. Built with Flask for the backend, SQLite for data storage, and Jinja2 for templating. Features a whimsical, magical UI theme.
 
-![Demo Video](["C:\Users\Pc\Videos\Screen Recordings\demo.mp4"](https://github.com/me-r1em/whimsica-blog/raw/main/demo.mp4)) 
-
+![Demo Video]
+<video src="https://github.com/me-r1em/whimsica-blog/raw/main/demo.mp4" controls width="100%">
+  Your browser does not support the video tag.
+</video>
 ## Features
 - **User Authentication**: Register, login, logout, and password changes using Flask-Login and Werkzeug.
 - **Profile Management**: Update username, email, bio, and avatar (with image upload and resizing via PIL).
@@ -58,7 +60,10 @@ For the Node.js backend: `node server.js` (runs on port 5000). Use a frontend li
 - **Admin/Deletion**: Users can only delete their own posts.
 
 ## Demo
-Watch the output video: [demo.mp4]([./demo.mp4](https://github.com/me-r1em/whimsica-blog/raw/main/demo.mp4))
+Watch the output video: [demo.mp4]
+<video src="https://github.com/me-r1em/whimsica-blog/raw/main/demo.mp4" controls width="100%">
+  Your browser does not support the video tag.
+</video>
 
 
 ## Contributing
