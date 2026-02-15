@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align: center; margin-bottom: 3rem;">
+    <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: #1f2937; margin-bottom: 0.5rem;">
+        Magical Moments
+    </h1>
+    <p style="color: #6b7280; font-size: 1.2rem; font-style: italic;">
+        Stories from the enchanted realm ✨
+    </p>
+    
+    {% if current_user.is_authenticated %}
+    <div style="margin-top: 2rem;">
+        <a href="{{ url_for('write') }}" class="magical-button write-button" style="font-size: 1.2rem; padding: 1rem 2.5rem;">
+            <i class="fas fa-wand-sparkles"></i>
+            Write a New Story
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<div class="posts-grid">
+    {% for post in posts %}
+    <article class="magical-post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <div class="post-meta">
+            <a href="{{ url_for('profile', username=post.author.username) }}" class="post-author">
+                <img src="{{ post.author.avatar_url() }}" alt="{{ post.author.username }}" class="author-avatar-small">
+                {{ post.author.username }}
+            </a>
+            <span class="post-date">
+                <i class="fas fa-calendar"></i>
+                {{ post.timestamp.strftime('%B %d, %Y • %I:%M %p') }}
+            </span>
+        </div>
+        <div class="post-content">
+            {{ post.body }}
+        </div>
+        {% if current_user == post.author %}
+        <div style="display: flex; justify-content: flex-end;">
+            <a href="{{ url_for('delete_post', post_id=post.id) }}" 
+               class="delete-link"
+               onclick="return confirm('Vanish this story into the ether? ✨')">
+                <i class="fas fa-cloud-moon"></i>
+                Vanish
+            </a>
+        </div>
+        {% endif %}
+    </article>
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-cloud-moon"></i>
+        <h3>No stories yet...</h3>
+        <p style="color: #6b7280; margin-bottom: 1.5rem; font-size: 1.1rem;">
+            The realm is quiet, waiting for magic.
+        </p>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('write') }}" class="magical-button">
+                <i class="fas fa-wand-sparkles"></i>
+                Write the First Story
+            </a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="magical-button">
+                <i class="fas fa-ghost"></i>
+                Join the Magic
+            </a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

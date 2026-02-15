@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <i class="fas fa-feather" style="font-size: 3rem; color: #8b5cf6; margin-bottom: 1rem;"></i>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #1f2937; margin-bottom: 0.5rem;">
+            Write Your Magic
+        </h1>
+        <p style="color: #6b7280; font-size: 1.1rem;">
+            Your words have power. Share them with the realm. ✨
+        </p>
+    </div>
+    
+    <div class="enchanted-form" style="background: white; backdrop-filter: none;">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-heading" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                    {{ form.title.label }}
+                </label>
+                {{ form.title(class="form-control", placeholder="Give your story a beautiful name...", style="font-size: 1.2rem;") }}
+                {% for error in form.title.errors %}
+                    <span style="color: #ef4444; font-size: 0.9rem; margin-top: 0.3rem; display: block;">
+                        <i class="fas fa-exclamation-circle"></i> {{ error }}
+                    </span>
+                {% endfor %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-pen-fancy" style="margin-right: 0.5rem; color: #8b5cf6;"></i>
+                    {{ form.body.label }}
+                </label>
+                {{ form.body(class="form-control", rows=12, placeholder="Once upon a time...", style="font-size: 1.1rem;") }}
+                {% for error in form.body.errors %}
+                    <span style="color: #ef4444; font-size: 0.9rem; margin-top: 0.3rem; display: block;">
+                        <i class="fas fa-exclamation-circle"></i> {{ error }}
+                    </span>
+                {% endfor %}
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                <a href="{{ url_for('index') }}" class="nav-link" style="background: white;">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </a>
+                <button type="submit" class="magical-button" style="padding: 0.9rem 2.5rem;">
+                    <i class="fas fa-wand-sparkles"></i>
+                    Publish Story
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.3); border-radius: 1rem; text-align: center;">
+        <p style="color: #6b7280; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <i class="fas fa-star"></i>
+            Your story will appear on the homepage for all to read.
+            <i class="fas fa-star"></i>
+        </p>
+    </div>
+</div>
+
+<style>
+    .form-group { margin-bottom: 2rem; }
+    .form-label { 
+        display: block; 
+        margin-bottom: 0.8rem; 
+        font-weight: 600; 
+        color: #4b5563; 
+        font-size: 1rem; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+    }
+    .form-control {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 1rem;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.3s ease;
+    }
+    .form-control:focus {
+        outline: none;
+        border-color: #8b5cf6;
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+        transform: scale(1.01);
+    }
+</style>
+{% endblock %}

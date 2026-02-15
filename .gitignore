@@ -1,0 +1,20 @@
+# Python ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.env
+blog.db  
+
+# Node.js ignores (if using the JS backend)
+node_modules/
+.env
+
+# General
+*.log
+*.tmp
+*.swp
+.DS_Store  # For macOS

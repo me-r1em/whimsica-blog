@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <i class="fas fa-circle-user" style="font-size: 3rem; color: #8b5cf6;"></i>
+        <div>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #1f2937; margin-bottom: 0.3rem;">
+                {{ user.username }}'s Grimoire
+            </h1>
+            <p style="color: #6b7280; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-feather"></i>
+                {{ posts|length }} magical {{ 'story' if posts|length == 1 else 'stories' }}
+            </p>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<div class="posts-grid">
+    {% for post in posts %}
+    <article class="magical-post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <div class="post-meta">
+            <span class="post-date">
+                <i class="fas fa-calendar"></i>
+                {{ post.timestamp.strftime('%B %d, %Y at %I:%M %p') }}
+            </span>
+        </div>
+        <div class="post-content">
+            {{ post.body }}
+        </div>
+        {% if current_user == user %}
+        <div style="display: flex; justify-content: flex-end;">
+            <a href="{{ url_for('delete_post', post_id=post.id) }}" 
+               class="delete-link"
+               onclick="return confirm('Vanish this story into the ether? ✨')">
+                <i class="fas fa-cloud-moon"></i>
+                Vanish
+            </a>
+        </div>
+        {% endif %}
+    </article>
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-cloud-moon"></i>
+        <h3>An empty grimoire...</h3>
+        <p style="color: #6b7280;">
+            {{ user.username }} hasn't written any spells yet.
+        </p>
+    </div>
+    {% endfor %}
+</div>
+
+<div style="text-align: center; margin-top: 2rem;">
+    <a href="{{ url_for('index') }}" class="nav-link" style="display: inline-flex; background: white;">
+        <i class="fas fa-arrow-left"></i>
+        Back to all stories
+    </a>
+</div>
+{% endblock %}
